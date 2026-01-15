@@ -13,3 +13,4 @@ mybatis:
   type-aliases-package: com.yh.travel.domain
   configuration:
     map-underscore-to-camel-case: true
+    local-cache-scope: STATEMENT
