@@ -24,4 +24,20 @@
 
     </insert>
 
+    <select id="findTravelByUserId"
+            resultType="com.YH.travelaccount.travel.dto.TravelListResponse">
+
+        SELECT
+            t.id            AS travelId,
+            t.title          AS title,
+            t.start_date    AS startDate,
+            t.end_date      AS endDate,
+            t.created_at    AS createdAt
+        FROM travel t
+                 JOIN user_travel ut ON t.id = ut.travel_id
+        WHERE ut.user_id = #{userId}
+        ORDER BY t.created_at DESC
+
+    </select>
+
 </mapper>

@@ -1,12 +1,12 @@
 package com.YH.travelaccount.travel.controller;
 
 import com.YH.travelaccount.travel.dto.TravelCreateRequest;
+import com.YH.travelaccount.travel.dto.TravelListResponse;
 import com.YH.travelaccount.travel.service.TravelService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +21,10 @@ public class TravelController {
         Long mockUserId = 1L;
 
         travelService.createTravel(request, mockUserId);
+    }
+
+    @GetMapping("/list")
+    public List<TravelListResponse> getTravels(@RequestParam("userId") Long userId) {
+        return travelService.getTravels(userId);
     }
 }
