@@ -1,8 +1,17 @@
 package com.YH.travelaccount.travel.mapper;
 
+import com.YH.travelaccount.travel.domain.Travel;
+import com.YH.travelaccount.travel.dto.TravelListResponse;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
-public class TravelMapper {
-    // TODO: 여행 관련 DB 매핑 메서드
+public interface TravelMapper {
+    void insert(Travel travel);
+
+    List<TravelListResponse> findTravelByUserId(
+            @Param("userId") Long userId
+    );
 }

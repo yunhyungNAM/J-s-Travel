@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.YH.travelaccount.travel.mapper.TravelMapper">
+
+    <insert id="insert" parameterType="com.YH.travelaccount.travel.domain.Travel"
+            useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO travel (
+            title,
+            start_date,
+            end_date,
+            created_by,
+            created_at
+        ) VALUES (
+                     #{title},
+                     #{startDate},
+                     #{endDate},
+                     #{createdBy},
+                     NOW()
+                 )
+
+    </insert>
+
+    <select id="findTravelByUserId"
+            resultType="com.YH.travelaccount.travel.dto.TravelListResponse">
+
+        SELECT
+            t.id            AS travelId,
+            t.title          AS title,
+            t.start_date    AS startDate,
+            t.end_date      AS endDate,
+            t.created_at    AS createdAt
+        FROM travel t
+                 JOIN user_travel ut ON t.id = ut.travel_id
+        WHERE ut.user_id = #{userId}
+        ORDER BY t.created_at DESC
+
+    </select>
+
+</mapper>
